@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>Thực đơn</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 0 auto; padding: 16px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+        th { background: #f3f3f3; }
+        .het-hang { color: #999; text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <h1>Thực đơn ({{ menu|length }} món)</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên món</th>
+                <th>Giá</th>
+                <th>Tình trạng</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for mon in menu %}
+            <tr{% if not mon.available %} class="het-hang"{% endif %}>
+                <td>{{ loop.index }}</td>
+                <td>{{ mon.name|title }}</td>
+                <td>{{ mon.price|vnd }}</td>
+                <td>{{ "Còn hàng" if mon.available else "Hết hàng" }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Chưa có món nào.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        {% if menu %}
+        <tfoot>
+            <tr>
+                <td colspan="2"><strong>Giá trung bình</strong></td>
+                <td colspan="2">{{ ((menu|sum(attribute='price')) / (menu|length))|vnd }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Đang có</strong></td>
+                <td colspan="2">{{ menu|selectattr('available')|list|length }} món</td>
+            </tr>
+        </tfoot>
+        {% endif %}
+    </table>
+</body>
+</html>

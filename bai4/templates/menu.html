@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% from "_macros.html" import item_card, pagination %}
+
+{% block title %}Thực đơn - Sông Hương{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .grid { display: flex; flex-wrap: wrap; gap: 12px; }
+        .card { border: 1px solid #ddd; padding: 8px; width: 160px; }
+        .pagination { margin-top: 16px; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Thực đơn ({{ total }} món)</h1>
+
+    <div class="grid">
+    {% for item in items %}
+        {{ item_card(item) }}
+    {% endfor %}
+    </div>
+
+    {{ pagination(page, pages, 'menu') }}
+{% endblock %}

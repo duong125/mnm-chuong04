@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Thực đơn - Sông Hương{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <style>
+        .grid { display: flex; flex-wrap: wrap; gap: 12px; }
+        .card { border: 1px solid #ddd; padding: 8px; width: 160px; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Thực đơn ({{ menu|length }} món)</h1>
+    <div class="grid">
+    {% for item in menu %}
+        <div class="card">
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.price|vnd }}</p>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

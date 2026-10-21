@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Sông Hương{% endblock %}</title>
+    {% block styles %}
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 16px; }
+        nav { border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        nav a { margin-right: 12px; }
+        footer { margin-top: 32px; border-top: 1px solid #ccc; padding-top: 8px; color: #666; }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('index') }}">Trang chủ</a>
+        <a href="{{ url_for('menu') }}">Thực đơn</a>
+        <a href="{{ url_for('contact') }}">Liên hệ</a>
+    </nav>
+
+    <main>
+    {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>{{ shop.name }} · {{ shop.address }} · ĐT: {{ shop.phone }}</p>
+    </footer>
+</body>
+</html>
